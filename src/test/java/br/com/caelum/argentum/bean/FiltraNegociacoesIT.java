@@ -41,7 +41,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 @RunWith(Arquillian.class)
 public class FiltraNegociacoesIT {
 
-	private static final String FAKE_SETTINGS = "c:/users/wellingtongaboardi/.m2/settings.xml";
+	
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("ddMMyyyy");
 	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8080";
 	private WebDriver driver;
@@ -85,7 +85,7 @@ public class FiltraNegociacoesIT {
 
 	@After
 	public void desligaNavegador() {
-		driver.quit();
+		//driver.quit();
 	}
 
 	@Test
