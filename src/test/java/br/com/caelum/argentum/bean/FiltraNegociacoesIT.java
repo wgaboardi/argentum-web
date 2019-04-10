@@ -56,7 +56,7 @@ public class FiltraNegociacoesIT {
                                     .resolve().withTransitivity().asFile();
 				
 		WebArchive webArchive = ShrinkWrap
-				.create(WebArchive.class, "argentum-web.war")
+				.create(WebArchive.class, "root.war")
 				.addPackages(true, "br.com.caelum.argentum")
 				.addAsLibraries(files)
 				.as(ExplodedImporter.class)
@@ -85,14 +85,13 @@ public class FiltraNegociacoesIT {
 
 	@After
 	public void desligaNavegador() {
-		//driver.quit();
+		driver.quit();
 	}
 
 	@Test
 	public void verificaResultadosFiltradosNaTabela()
 			throws InterruptedException {
-		driver.navigate().to(HTTP_LOCALHOST_8888 + "/argentum-web/index.xhtml");
-		System.out.println(HTTP_LOCALHOST_8888 + "/argentum-web/index.xhtml");
+		driver.navigate().to(HTTP_LOCALHOST_8888 + "/index.xhtml");
 
 		List<WebElement> linhasDaTabelaDeNotificacoes = driver.findElements(By
 				.xpath("//*[@id='tabelaNegociacoes']/div[2]/table/tbody/tr"));
