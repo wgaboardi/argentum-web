@@ -10,12 +10,23 @@ import junit.framework.Assert;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.GenericArchive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.GenericArchive;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
+import org.jboss.shrinkwrap.resolver.api.Resolvers;
+import org.jboss.shrinkwrap.resolver.api.maven.ConfigurableMavenResolverSystem;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenResolvedArtifact;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem;
+import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
+import org.jboss.shrinkwrap.resolver.api.maven.archive.importer.MavenImporter;
+import org.jboss.shrinkwrap.resolver.api.maven.coordinate.MavenCoordinate;
+import org.jboss.shrinkwrap.resolver.api.maven.coordinate.MavenDependencies;
+import org.jboss.shrinkwrap.resolver.api.maven.coordinate.MavenDependency;
+import org.jboss.shrinkwrap.resolver.api.maven.coordinate.MavenDependencyExclusion;
+import org.jboss.shrinkwrap.resolver.api.maven.strategy.AcceptScopesStrategy;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,25 +41,24 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 @RunWith(Arquillian.class)
 public class FiltraNegociacoesIT {
 
+	private static final String FAKE_SETTINGS = "c:/users/wellingtongaboardi/.m2/settings.xml";
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("ddMMyyyy");
-	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8888";
+	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8080/argentum-web";
 	private WebDriver driver;
 
 	@Deployment
 	public static WebArchive createWar() {
 
-		MavenDependencyResolver resolver = DependencyResolvers.use(
-				MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
-
+		
+	
+		File[] files = Maven.resolver().loadPomFromFile("pom.xml")
+                                    .importDependencies(ScopeType.COMPILE, ScopeType.TEST, ScopeType.PROVIDED, ScopeType.RUNTIME)
+                                    .resolve().withTransitivity().asFile();
+				
 		WebArchive webArchive = ShrinkWrap
 				.create(WebArchive.class, "ROOT.war")
 				.addPackages(true, "br.com.caelum.argentum")
-				.addAsLibraries(
-						resolver.artifact("com.sun.faces:jsf-api")
-								.artifact("com.sun.faces:jsf-impl")
-								.artifact("org.primefaces:primefaces")
-								.artifact("com.thoughtworks.xstream:xstream")
-								.resolveAs(GenericArchive.class))
+				.addAsLibraries(files)
 				.as(ExplodedImporter.class)
 				.importDirectory(new File("src/main/webapp"))
 				.as(WebArchive.class);
