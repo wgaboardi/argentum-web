@@ -24,6 +24,7 @@ public class ClienteWebService {
 			return new LeitorXML().carrega(content);
 		} catch (IOException e) {
 			System.out.println (e.toString());
+			return null;
 		} 
 		finally {
 			connection.disconnect();
