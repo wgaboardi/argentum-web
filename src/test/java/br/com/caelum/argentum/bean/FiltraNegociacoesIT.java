@@ -43,7 +43,7 @@ public class FiltraNegociacoesIT {
 
 	private static final String FAKE_SETTINGS = "c:/users/wellingtongaboardi/.m2/settings.xml";
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("ddMMyyyy");
-	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8080/argentum-web";
+	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8080";
 	private WebDriver driver;
 
 	@Deployment
@@ -91,7 +91,7 @@ public class FiltraNegociacoesIT {
 	@Test
 	public void verificaResultadosFiltradosNaTabela()
 			throws InterruptedException {
-		driver.navigate().to(HTTP_LOCALHOST_8888 + "/index.xhtml");
+		driver.navigate().to(HTTP_LOCALHOST_8888 + "/argentum-web/index.xhtml");
 
 		List<WebElement> linhasDaTabelaDeNotificacoes = driver.findElements(By
 				.xpath("//*[@id='tabelaNegociacoes']/div[2]/table/tbody/tr"));
