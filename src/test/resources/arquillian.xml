@@ -3,16 +3,18 @@
     xmlns="http://jboss.org/schema/arquillian"
     xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
-       <container qualifier="tomcat" default="true">
+
+    
+    <container qualifier="tomcat" default="true">
            <configuration>
-               <property name="tomcatHome">target/tomcat-embedded-7</property>
+               <property name="tomcatHome">c:/applications/apache-tomcat-8.5.37</property>
                <property name="workDir">work</property>
-               <property name="bindHttpPort">8888</property>
                <property name="unpackArchive">true</property>
-               <property name="javaVmArguments">
-                   -Dhttp.proxyHost=localhost -Dhttps.proxyHost=localhost
-                   -Dhttp.proxyPort=3128 -Dhttps.proxyPort=3128
-               </property>    
-           </configuration>
+            <property name="jmxPort">8089</property>
+            <property name="bindHttpPort">8080</property>
+            <property name="user">jenkins</property>
+            <property name="pass">jenkins</property>
+            <property name="serverConfig">server.xml</property>          
+        </configuration>
        </container>
 </arquillian>
