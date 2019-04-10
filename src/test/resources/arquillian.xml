@@ -10,8 +10,8 @@
                <property name="tomcatHome">c:/applications/apache-tomcat-8.5.37</property>
                <property name="workDir">work</property>
                <property name="unpackArchive">true</property>
-            <property name="jmxPort">8089</property>
-            <property name="bindHttpPort">8080</property>
+            <property name="jmxPort">8189</property>
+            <property name="bindHttpPort">8888</property>
             <property name="user">jenkins</property>
             <property name="pass">jenkins</property>
             <property name="serverConfig">server.xml</property>          
