@@ -26,7 +26,7 @@ public class ClienteWebService {
 			System.out.println (e.toString());
 		} 
 		finally {
-			connection.close();
+			connection.disconnect();
 		}
 	}
 }
