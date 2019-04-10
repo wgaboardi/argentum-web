@@ -43,7 +43,7 @@ public class FiltraNegociacoesIT {
 
 	
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("ddMMyyyy");
-	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8080";
+	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8080/argentum-web";
 	private WebDriver driver;
 
 	@Deployment
@@ -56,7 +56,7 @@ public class FiltraNegociacoesIT {
                                     .resolve().withTransitivity().asFile();
 				
 		WebArchive webArchive = ShrinkWrap
-				.create(WebArchive.class, "ROOT.war")
+				.create(WebArchive.class, "argentum-web.war")
 				.addPackages(true, "br.com.caelum.argentum")
 				.addAsLibraries(files)
 				.as(ExplodedImporter.class)
