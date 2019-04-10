@@ -56,7 +56,7 @@ public class FiltraNegociacoesIT {
                                     .resolve().withTransitivity().asFile();
 				
 		WebArchive webArchive = ShrinkWrap
-				.create(WebArchive.class, "root.war")
+				.create(WebArchive.class, "ROOT.war")
 				.addPackages(true, "br.com.caelum.argentum")
 				.addAsLibraries(files)
 				.as(ExplodedImporter.class)
