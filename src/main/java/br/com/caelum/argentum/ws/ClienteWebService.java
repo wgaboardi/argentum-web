@@ -25,5 +25,8 @@ public class ClienteWebService {
 		} catch (IOException e) {
 			System.out.println (e.toString());
 		} 
+		finally {
+			connection.close();
+		}
 	}
 }
